@@ -2,7 +2,11 @@
   "name": "totper",
   "author": "Alexey Cluster",
   "version": "1.3.0",
-  "keywords": ["pebble-app", "totp", "authenticator"],
+  "keywords": [
+    "pebble-app",
+    "totp",
+    "authenticator"
+  ],
   "private": true,
   "dependencies": {},
   "pebble": {
@@ -44,13 +48,388 @@
           "type": "bitmap",
           "name": "ICON_PROXMOX",
           "file": "images/icon_proxmox.png",
-          "targetPlatforms": ["emery", "gabbro"]
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
         },
         {
           "type": "bitmap",
           "name": "ICON_OPENVPN",
           "file": "images/icon_openvpn.png",
-          "targetPlatforms": ["emery", "gabbro"]
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_GOOGLE",
+          "file": "images/icon_google.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_GITHUB",
+          "file": "images/icon_github.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_GITLAB",
+          "file": "images/icon_gitlab.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_BITBUCKET",
+          "file": "images/icon_bitbucket.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_APPLE",
+          "file": "images/icon_apple.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_DISCORD",
+          "file": "images/icon_discord.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_DROPBOX",
+          "file": "images/icon_dropbox.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_CLOUDFLARE",
+          "file": "images/icon_cloudflare.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_FACEBOOK",
+          "file": "images/icon_facebook.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_INSTAGRAM",
+          "file": "images/icon_instagram.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_X",
+          "file": "images/icon_x.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_REDDIT",
+          "file": "images/icon_reddit.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_TWITCH",
+          "file": "images/icon_twitch.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_STEAM",
+          "file": "images/icon_steam.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_EPICGAMES",
+          "file": "images/icon_epicgames.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_PAYPAL",
+          "file": "images/icon_paypal.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_DOCKER",
+          "file": "images/icon_docker.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_NPM",
+          "file": "images/icon_npm.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_BITWARDEN",
+          "file": "images/icon_bitwarden.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_1PASSWORD",
+          "file": "images/icon_1password.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_PROTON",
+          "file": "images/icon_proton.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_DIGITALOCEAN",
+          "file": "images/icon_digitalocean.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_HETZNER",
+          "file": "images/icon_hetzner.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_TAILSCALE",
+          "file": "images/icon_tailscale.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_NAMECHEAP",
+          "file": "images/icon_namecheap.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_OVH",
+          "file": "images/icon_ovh.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_BINANCE",
+          "file": "images/icon_binance.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_COINBASE",
+          "file": "images/icon_coinbase.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_MASTODON",
+          "file": "images/icon_mastodon.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_NEXTCLOUD",
+          "file": "images/icon_nextcloud.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_SYNOLOGY",
+          "file": "images/icon_synology.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_WORDPRESS",
+          "file": "images/icon_wordpress.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_STRIPE",
+          "file": "images/icon_stripe.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_ATLASSIAN",
+          "file": "images/icon_atlassian.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_OKTA",
+          "file": "images/icon_okta.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_ANTHROPIC",
+          "file": "images/icon_anthropic.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_MULLVAD",
+          "file": "images/icon_mullvad.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_NORDVPN",
+          "file": "images/icon_nordvpn.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_UBIQUITI",
+          "file": "images/icon_ubiquiti.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_TPLINK",
+          "file": "images/icon_tplink.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_NOTION",
+          "file": "images/icon_notion.png",
+          "targetPlatforms": [
+            "emery",
+            "gabbro"
+          ]
         }
       ]
     }
