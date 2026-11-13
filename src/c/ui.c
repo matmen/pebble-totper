@@ -38,6 +38,7 @@ typedef struct {
 static AppIcon s_icons[] = {
   { "proxmox", RESOURCE_ID_ICON_PROXMOX, NULL },
   { "openvpn", RESOURCE_ID_ICON_OPENVPN, NULL },
+  { "sophos", RESOURCE_ID_ICON_OPENVPN, NULL },
 };
 
 static bool prv_contains_ci(const char *haystack, const char *needle) {
