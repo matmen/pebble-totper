@@ -39,6 +39,18 @@
           "name": "MENU_ICON",
           "file": "images/icon.png",
           "menuIcon": true
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_PROXMOX",
+          "file": "images/icon_proxmox.png",
+          "targetPlatforms": ["emery", "gabbro"]
+        },
+        {
+          "type": "bitmap",
+          "name": "ICON_OPENVPN",
+          "file": "images/icon_openvpn.png",
+          "targetPlatforms": ["emery", "gabbro"]
         }
       ]
     }

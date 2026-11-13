@@ -20,6 +20,59 @@ static bool s_out_of_memory = false;
 static SettingsWindow *s_settings_window = NULL;
 
 // ============================================================================
+// App icons (large color screens only)
+// ============================================================================
+
+#if defined(PBL_PLATFORM_EMERY) || defined(PBL_PLATFORM_GABBRO)
+#define HAS_ICONS 1
+#define ICON_SIZE 32
+#define ICON_MARGIN 4
+
+typedef struct {
+  const char *keyword;  // matched case-insensitively against label and account name
+  uint32_t resource_id;
+  GBitmap *bitmap;      // loaded lazily, kept for the lifetime of the app
+} AppIcon;
+
+// To add an icon: add a bitmap resource in package.json and a row here
+static AppIcon s_icons[] = {
+  { "proxmox", RESOURCE_ID_ICON_PROXMOX, NULL },
+  { "openvpn", RESOURCE_ID_ICON_OPENVPN, NULL },
+};
+
+static bool prv_contains_ci(const char *haystack, const char *needle) {
+  size_t n = strlen(needle);
+  for (; *haystack; haystack++) {
+    size_t i = 0;
+    while (i < n && haystack[i] && (haystack[i] | 0x20) == needle[i]) i++;
+    if (i == n) return true;
+  }
+  return false;
+}
+
+static GBitmap *prv_icon_for(const TotpAccount *account) {
+  for (size_t i = 0; i < ARRAY_LENGTH(s_icons); i++) {
+    AppIcon *icon = &s_icons[i];
+    if (prv_contains_ci(account->label, icon->keyword) ||
+        prv_contains_ci(account->account_name, icon->keyword)) {
+      if (!icon->bitmap) icon->bitmap = gbitmap_create_with_resource(icon->resource_id);
+      return icon->bitmap;
+    }
+  }
+  return NULL;
+}
+
+static void prv_free_icons(void) {
+  for (size_t i = 0; i < ARRAY_LENGTH(s_icons); i++) {
+    if (s_icons[i].bitmap) {
+      gbitmap_destroy(s_icons[i].bitmap);
+      s_icons[i].bitmap = NULL;
+    }
+  }
+}
+#endif
+
+// ============================================================================
 // Account loading and caching
 // ============================================================================
 
@@ -116,7 +169,11 @@ static int16_t prv_menu_get_cell_height_callback(MenuLayer *menu_layer, MenuInde
     height += 10; // account name
   }
   
+#ifdef HAS_ICONS
+  height += 42; // code (large font)
+#else
   height += 35; // code
+#endif
   height += 1; // time remaining
   height += 0; // bottom padding
   
@@ -136,13 +193,24 @@ static void prv_menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, M
   
   GRect bounds = layer_get_bounds(cell_layer);
   int16_t y = 0;
+  int16_t x = 0;  // left edge of the text column
+  
+#ifdef HAS_ICONS
+  GBitmap *icon = prv_icon_for(cache->account);
+  if (icon) {
+    graphics_context_set_compositing_mode(ctx, GCompOpSet);
+    graphics_draw_bitmap_in_rect(ctx, icon,
+        GRect(ICON_MARGIN, (bounds.size.h - 1 - ICON_SIZE) / 2, ICON_SIZE, ICON_SIZE));
+    x = ICON_MARGIN + ICON_SIZE;
+  }
+#endif
   
   // Always use black text (no highlight visual feedback needed)
   graphics_context_set_text_color(ctx, GColorBlack);
   graphics_draw_text(ctx,
                     cache->account->label,
                     fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD),
-                    GRect(4, y, bounds.size.w - 8, 20),
+                    GRect(x + 4, y, bounds.size.w - x - 8, 20),
                     GTextOverflowModeTrailingEllipsis,
                     PBL_IF_RECT_ELSE(GTextAlignmentLeft, GTextAlignmentCenter),
                     NULL);
@@ -153,15 +221,27 @@ static void prv_menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, M
     graphics_draw_text(ctx,
                       cache->account->account_name,
                       fonts_get_system_font(FONT_KEY_GOTHIC_14),
-                      GRect(4, y, bounds.size.w - 8, 16),
+                      GRect(x + 4, y, bounds.size.w - x - 8, 16),
                       GTextOverflowModeTrailingEllipsis,
                       PBL_IF_RECT_ELSE(GTextAlignmentLeft, GTextAlignmentCenter),
                       NULL);
     y += 10;
   }
   
-  // Draw TOTP code (large, centered)
+  // Draw TOTP code (large, centered in the text column)
   const char *code_text = cache->code_valid ? cache->code : "------";
+#ifdef HAS_ICONS
+  // Bitham numbers font has digits only: use it for 6-digit codes, Gothic for the rest
+  bool big = cache->code_valid && cache->account->digits <= 6;
+  graphics_draw_text(ctx,
+                    code_text,
+                    fonts_get_system_font(big ? FONT_KEY_BITHAM_34_MEDIUM_NUMBERS : FONT_KEY_GOTHIC_28_BOLD),
+                    GRect(x, y + (big ? 0 : 4), bounds.size.w - x, 40),
+                    GTextOverflowModeTrailingEllipsis,
+                    GTextAlignmentCenter,
+                    NULL);
+  y += 42;
+#else
   graphics_draw_text(ctx,
                     code_text,
                     fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD),
@@ -170,6 +250,7 @@ static void prv_menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, M
                     GTextAlignmentCenter,
                     NULL);
   y += 35;
+#endif
 
   graphics_context_set_stroke_color(ctx, GColorBlack);
   graphics_context_set_stroke_width(ctx, 5);
@@ -496,6 +577,9 @@ void ui_deinit(void) {
   
   // Free account cache to prevent memory leak
   prv_free_account_cache();
+#ifdef HAS_ICONS
+  prv_free_icons();
+#endif
 }
 
 
