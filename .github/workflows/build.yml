@@ -2,9 +2,9 @@ name: Build Pebble App
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, icons ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, icons ]
   release:
     types: [ created ]
   workflow_dispatch:
