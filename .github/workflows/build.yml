@@ -39,20 +39,20 @@ jobs:
     - name: List build artifacts
       run: |
         ls -lh build/
-        file build/pebble-topter.pbw
+        file build/*.pbw
         
     - name: Upload build artifact (with commit SHA)
       uses: actions/upload-artifact@v4
       with:
         name: topter-${{ github.sha }}
-        path: build/pebble-topter.pbw
+        path: build/*.pbw
         retention-days: 90
         
     - name: Upload to release
       if: github.event_name == 'release'
       uses: softprops/action-gh-release@v1
       with:
-        files: build/pebble-topter.pbw
+        files: build/*.pbw
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
